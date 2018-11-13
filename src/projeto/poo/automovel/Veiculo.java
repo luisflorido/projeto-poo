@@ -2,30 +2,30 @@ package projeto.poo.automovel;
 
 import projeto.poo.Leitura;
 
-public class Automovel {
-	private int automovelID, nroPortas;
+public class Veiculo {
+	private int veiculoID, nroPortas;
 	private String placa, cor;
 	private char tipoCombustivel;
 	private long quilometragem;
-	private double custo;
+	private double valorDiaria;
 
-	public Automovel(int automovelID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
-			double custo) {
-		this.automovelID = automovelID;
+	public Veiculo(int veiculoID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
+			double valorDiaria) {
+		this.veiculoID = veiculoID;
 		this.placa = placa;
 		this.cor = cor;
 		this.nroPortas = nroPortas;
 		this.tipoCombustivel = tipoCombustivel;
 		this.quilometragem = quilometragem;
-		this.custo = custo;
+		this.valorDiaria = valorDiaria;
 	}
 
-	public static Automovel criar() {
-		int automovelID = 0, nroPortas;
+	public static Veiculo criar() {
+		int veiculoID = 0, nroPortas;
 		String placa, cor;
 		char tipoCombustivel;
 		long quilometragem;
-		double custo;
+		double valorDiaria;
 		// automovelID = Main.automovelID++;
 		System.out.println("Digite a placa:");
 		placa = Leitura.lerString();
@@ -42,27 +42,31 @@ public class Automovel {
 		System.out.println("Digite a quilometragem:");
 		quilometragem = (long) Leitura.lerInt();
 		System.out.println("Digite o custo:");
-		custo = (long) Leitura.lerDouble();
-		return new Automovel(automovelID, placa, cor, nroPortas, tipoCombustivel, quilometragem, custo);
+		valorDiaria = (long) Leitura.lerDouble();
+		return new Veiculo(veiculoID, placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiaria);
 	}
 
-	public double calcularCustos() {
-		return this.custo; // Provisório
+	public double calcularCustos(int dias, long km) {
+		return valorDiaria * dias;
+		if (km > 100) {
+			return valorDiaria * dias * Utilitaria.custoKmExtra;
+		}
 	}
 
-	@Override
-	public String toString() {
-		return "\n\tautomovelID=" + automovelID + ", \n\tplaca=" + placa + ", \n\tcor=" + cor + ", \n\tnroPortas="
-				+ nroPortas + ", \n\ttipoCombustivel=" + tipoCombustivel + ", \n\tquilometragem=" + quilometragem
-				+ ", \n\tcusto=" + custo + "\n";
+	public int getVeiculoID() {
+		return veiculoID;
 	}
 
-	public int getAutomovelID() {
-		return automovelID;
+	public void setVeiculoID(int veiculoID) {
+		this.veiculoID = veiculoID;
 	}
 
-	public void setAutomovelID(int automovelID) {
-		this.automovelID = automovelID;
+	public int getNroPortas() {
+		return nroPortas;
+	}
+
+	public void setNroPortas(int nroPortas) {
+		this.nroPortas = nroPortas;
 	}
 
 	public String getPlaca() {
@@ -81,14 +85,6 @@ public class Automovel {
 		this.cor = cor;
 	}
 
-	public int getNroPortas() {
-		return nroPortas;
-	}
-
-	public void setNroPortas(int nroPortas) {
-		this.nroPortas = nroPortas;
-	}
-
 	public char getTipoCombustivel() {
 		return tipoCombustivel;
 	}
@@ -105,12 +101,18 @@ public class Automovel {
 		this.quilometragem = quilometragem;
 	}
 
-	public double getCusto() {
-		return custo;
+	public double getValorDiaria() {
+		return valorDiaria;
 	}
 
-	public void setCusto(double custo) {
-		this.custo = custo;
+	public void setValorDiaria(double valorDiaria) {
+		this.valorDiaria = valorDiaria;
 	}
 
+	@Override
+	public String toString() {
+		return "Veiculo [veiculoID=" + veiculoID + ", nroPortas=" + nroPortas + ", placa=" + placa + ", cor=" + cor
+				+ ", tipoCombustivel=" + tipoCombustivel + ", quilometragem=" + quilometragem + ", valorDiaria="
+				+ valorDiaria + "]";
+	}
 }
