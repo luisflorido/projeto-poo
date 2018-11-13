@@ -2,21 +2,21 @@ package projeto.poo.automovel;
 
 import projeto.poo.Leitura;
 
-public class Onibus extends Automovel {
+public class Onibus extends Veiculo {
 
 	private int nroPassageiros;
 	private double vlSeguroPassageiro;
 
-	public Onibus(int automovelID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
-			double custo, int nroPassageiros, double vlSeguroPassageiro) {
-		super(automovelID, placa, cor, nroPortas, tipoCombustivel, quilometragem, custo);
+	public Onibus(int VeiculoID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
+			double valorDiaria, int nroPassageiros, double vlSeguroPassageiro) {
+		super(VeiculoID, placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiaria);
 		this.nroPassageiros = nroPassageiros;
 		this.vlSeguroPassageiro = vlSeguroPassageiro;
 	}
 
-	public Onibus(Automovel a, int nroPassageiros, double vlSeguroPassageiro) {
-		super(a.getAutomovelID(), a.getPlaca(), a.getCor(), a.getNroPortas(), a.getTipoCombustivel(),
-				a.getQuilometragem(), a.getCusto());
+	public Onibus(Veiculo a, int nroPassageiros, double vlSeguroPassageiro) {
+		super(a.getVeiculoID(), a.getPlaca(), a.getCor(), a.getNroPortas(), a.getTipoCombustivel(),
+				a.getQuilometragem(), a.getValorDiaria());
 		this.nroPassageiros = nroPassageiros;
 		this.vlSeguroPassageiro = vlSeguroPassageiro;
 	}
@@ -38,8 +38,14 @@ public class Onibus extends Automovel {
 				+ super.toString() + "]";
 	}
 
-	public double calcularCustos() {
-		return super.getCusto(); // Provisório
+	public double calcularCustos(int dias, long km) {
+		int totalpassenger;
+		totalpassenger = vlSeguroPassageiro*nroPassageiros;
+		return super.getCusto()*totalpassenger; // Provisório
+		if(guia == true){
+			return super.getCusto()*totalpassenger*dias;//dias onde foram utilizados guias
+		}
+		
 	}
 
 	public int getNroPassageiros() {
