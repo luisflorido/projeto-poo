@@ -6,15 +6,15 @@ public class Executivo extends Automovel {
 
 	private double vlOpcionais;
 
-	public Executivo(int automovelID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
-			double custo, double vlOpcionais) {
-		super(automovelID, placa, cor, nroPortas, tipoCombustivel, quilometragem, custo);
+	public Executivo(int veiculoID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
+			double valorDiario, double vlOpcionais) {
+		super(veiculoID, placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiario);
 		this.vlOpcionais = vlOpcionais;
 	}
 
 	public Executivo(Automovel a, double vlOpcionais) {
-		super(a.getAutomovelID(), a.getPlaca(), a.getCor(), a.getNroPortas(), a.getTipoCombustivel(),
-				a.getQuilometragem(), a.getCusto());
+		super(a.getVeiculoID(), a.getPlaca(), a.getCor(), a.getNroPortas(), a.getTipoCombustivel(),
+				a.getQuilometragem(), a.getValorDiario());
 		this.vlOpcionais = vlOpcionais;
 	}
 
@@ -31,8 +31,8 @@ public class Executivo extends Automovel {
 		return "Executivo [\n\tvlOpcionais=" + vlOpcionais + super.toString() + "]";
 	}
 
-	public double calcularCustos() {
-		return super.getCusto(); // Provisório
+	public double calcularCustos(int dias, long km) {
+		return valorDiaria*vlOpcionais;
 	}
 
 	public double getVlOpcionais() {
