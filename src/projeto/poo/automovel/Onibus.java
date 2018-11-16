@@ -30,12 +30,15 @@ public class Onibus extends Veiculo {
 		double vlSeguroPassageiro;
 		int nroPassageiros;
 		boolean guia;
+		int guiaI;
+
 		System.out.println("Digite o número de passageiros:");
 		nroPassageiros = Leitura.lerInt();
 		System.out.println("Digite o valor do seguro por passageiro:");
 		vlSeguroPassageiro = Leitura.lerDouble();
 		System.out.println("O ônibus possui guia? (1 - sim | 2 - não)");
-		guia = Boolean.getBoolean("" + Leitura.lerInt());
+		guiaI = Leitura.lerInt();
+		guia = guiaI == 1 ? true : false;
 		return new Onibus(a, nroPassageiros, vlSeguroPassageiro, guia);
 	}
 

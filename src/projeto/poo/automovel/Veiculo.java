@@ -4,7 +4,7 @@ import projeto.poo.Leitura;
 import projeto.poo.Utilitaria;
 
 public class Veiculo {
-	private int veiculoID = Utilitaria.IdVeiculo++, nroPortas;
+	private int veiculoID, nroPortas;
 	private String placa, cor;
 	private char tipoCombustivel;
 	private long quilometragem;
@@ -12,7 +12,7 @@ public class Veiculo {
 
 	public Veiculo(String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
 			double valorDiaria) {
-		//this.veiculoID = Utilitaria.IdVeiculo++;
+		this.veiculoID = Utilitaria.IdVeiculo++;
 		this.placa = placa;
 		this.cor = cor;
 		this.nroPortas = nroPortas;
@@ -111,8 +111,8 @@ public class Veiculo {
 
 	@Override
 	public String toString() {
-		return "Veiculo [\n\t\tveiculoID=" + veiculoID + ", \n\t\tnroPortas=" + nroPortas + ", \n\t\tplaca=" + placa + ", \n\t\tcor=" + cor
-				+ ", \n\t\ttipoCombustivel=" + tipoCombustivel + ", \n\t\tquilometragem=" + quilometragem + ", \n\t\tvalorDiaria="
-				+ valorDiaria + "]";
+		return "Veiculo [\n\t\tveiculoID=" + veiculoID + ", \n\t\tnroPortas=" + nroPortas + ", \n\t\tplaca=" + placa
+				+ ", \n\t\tcor=" + cor + ", \n\t\ttipoCombustivel=" + tipoCombustivel + ", \n\t\tquilometragem="
+				+ quilometragem + ", \n\t\tvalorDiaria=" + valorDiaria + "\n]";
 	}
 }
