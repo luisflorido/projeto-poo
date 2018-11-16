@@ -6,20 +6,20 @@ public class Executivo extends Automovel {
 
 	private double vlOpcionais;
 
-	public Executivo(int veiculoID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
-			double valorDiario, double vlOpcionais) {
-		super(veiculoID, placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiario);
+	public Executivo(String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
+			double valorDiaria, double vlOpcionais) {
+		super(placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiaria);
 		this.vlOpcionais = vlOpcionais;
 	}
 
-	public Executivo(Automovel a, double vlOpcionais) {
-		super(a.getVeiculoID(), a.getPlaca(), a.getCor(), a.getNroPortas(), a.getTipoCombustivel(),
-				a.getQuilometragem(), a.getValorDiario());
+	public Executivo(Veiculo a, double vlOpcionais) {
+		super(a.getPlaca(), a.getCor(), a.getNroPortas(), a.getTipoCombustivel(), a.getQuilometragem(),
+				a.getValorDiaria());
 		this.vlOpcionais = vlOpcionais;
 	}
 
 	public static Executivo criar() {
-		Automovel a = Automovel.criar();
+		Veiculo a = Veiculo.criar();
 		double vlOpcionais;
 		System.out.println("Digite o valor opcional:");
 		vlOpcionais = Leitura.lerDouble();
@@ -28,11 +28,11 @@ public class Executivo extends Automovel {
 
 	@Override
 	public String toString() {
-		return "Executivo [\n\tvlOpcionais=" + vlOpcionais + super.toString() + "]";
+		return "Executivo [\n\tvlOpcionais=" + vlOpcionais + "\n\t" + super.toString() + "\n]";
 	}
 
 	public double calcularCustos(int dias, long km) {
-		return valorDiaria*vlOpcionais;
+		return dias * this.getValorDiaria() + vlOpcionais;
 	}
 
 	public double getVlOpcionais() {

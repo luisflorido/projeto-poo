@@ -1,51 +1,56 @@
 package projeto.poo.automovel;
 
 import projeto.poo.Leitura;
+import projeto.poo.Utilitaria;
 
 public class Onibus extends Veiculo {
 
 	private int nroPassageiros;
 	private double vlSeguroPassageiro;
+	private boolean guia;
 
-	public Onibus(int VeiculoID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
-			double valorDiaria, int nroPassageiros, double vlSeguroPassageiro) {
-		super(VeiculoID, placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiaria);
+	public Onibus(String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem, double valorDiaria,
+			int nroPassageiros, double vlSeguroPassageiro, boolean guia) {
+		super(placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiaria);
 		this.nroPassageiros = nroPassageiros;
 		this.vlSeguroPassageiro = vlSeguroPassageiro;
+		this.guia = guia;
 	}
 
-	public Onibus(Veiculo a, int nroPassageiros, double vlSeguroPassageiro) {
-		super(a.getVeiculoID(), a.getPlaca(), a.getCor(), a.getNroPortas(), a.getTipoCombustivel(),
-				a.getQuilometragem(), a.getValorDiaria());
+	public Onibus(Veiculo a, int nroPassageiros, double vlSeguroPassageiro, boolean guia) {
+		super(a.getPlaca(), a.getCor(), a.getNroPortas(), a.getTipoCombustivel(), a.getQuilometragem(),
+				a.getValorDiaria());
 		this.nroPassageiros = nroPassageiros;
 		this.vlSeguroPassageiro = vlSeguroPassageiro;
+		this.guia = guia;
 	}
 
 	public static Onibus criar() {
-		Automovel a = Automovel.criar();
+		Veiculo a = Veiculo.criar();
 		double vlSeguroPassageiro;
 		int nroPassageiros;
+		boolean guia;
 		System.out.println("Digite o número de passageiros:");
 		nroPassageiros = Leitura.lerInt();
 		System.out.println("Digite o valor do seguro por passageiro:");
 		vlSeguroPassageiro = Leitura.lerDouble();
-		return new Onibus(a, nroPassageiros, vlSeguroPassageiro);
+		System.out.println("O ônibus possui guia? (1 - sim | 2 - não)");
+		guia = Boolean.getBoolean("" + Leitura.lerInt());
+		return new Onibus(a, nroPassageiros, vlSeguroPassageiro, guia);
 	}
 
 	@Override
 	public String toString() {
 		return "Executivo [\n\tnroPassageiros=" + nroPassageiros + "\n\tvlSeguroPassageiro=" + vlSeguroPassageiro
-				+ super.toString() + "]";
+				+ "\n\tguia" + guia + "\n\t" + super.toString() + "\n]";
 	}
 
 	public double calcularCustos(int dias, long km) {
-		int totalpassenger;
-		totalpassenger = vlSeguroPassageiro*nroPassageiros;
-		return super.getCusto()*totalpassenger; // Provisório
-		if(guia == true){
-			return super.getCusto()*totalpassenger*dias;//dias onde foram utilizados guias
-		}
-		
+		double custo = super.calcularCustos(dias, km), total = vlSeguroPassageiro * nroPassageiros;
+		if (guia == true)
+			return custo + total + Utilitaria.custoGuia;
+		else
+			return custo + total;
 	}
 
 	public int getNroPassageiros() {
@@ -62,6 +67,14 @@ public class Onibus extends Veiculo {
 
 	public void setVlSeguroPassageiro(double vlSeguroPassageiro) {
 		this.vlSeguroPassageiro = vlSeguroPassageiro;
+	}
+
+	public boolean isGuia() {
+		return guia;
+	}
+
+	public void setGuia(boolean guia) {
+		this.guia = guia;
 	}
 
 }

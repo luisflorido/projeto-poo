@@ -1,17 +1,18 @@
 package projeto.poo.automovel;
 
 import projeto.poo.Leitura;
+import projeto.poo.Utilitaria;
 
 public class Veiculo {
-	private int veiculoID, nroPortas;
+	private int veiculoID = Utilitaria.IdVeiculo++, nroPortas;
 	private String placa, cor;
 	private char tipoCombustivel;
 	private long quilometragem;
 	private double valorDiaria;
 
-	public Veiculo(int veiculoID, String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
+	public Veiculo(String placa, String cor, int nroPortas, char tipoCombustivel, long quilometragem,
 			double valorDiaria) {
-		this.veiculoID = veiculoID;
+		//this.veiculoID = Utilitaria.IdVeiculo++;
 		this.placa = placa;
 		this.cor = cor;
 		this.nroPortas = nroPortas;
@@ -21,12 +22,11 @@ public class Veiculo {
 	}
 
 	public static Veiculo criar() {
-		int veiculoID = 0, nroPortas;
+		int nroPortas;
 		String placa, cor;
 		char tipoCombustivel;
 		long quilometragem;
 		double valorDiaria;
-		// automovelID = Main.automovelID++;
 		System.out.println("Digite a placa:");
 		placa = Leitura.lerString();
 		System.out.println("Digite a cor:");
@@ -43,14 +43,14 @@ public class Veiculo {
 		quilometragem = (long) Leitura.lerInt();
 		System.out.println("Digite o custo:");
 		valorDiaria = (long) Leitura.lerDouble();
-		return new Veiculo(veiculoID, placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiaria);
+		return new Veiculo(placa, cor, nroPortas, tipoCombustivel, quilometragem, valorDiaria);
 	}
 
 	public double calcularCustos(int dias, long km) {
-		return valorDiaria * dias;
-		if (km > 100) {
-			return valorDiaria * dias * Utilitaria.custoKmExtra;
-		}
+		if (km > 100)
+			return dias * valorDiaria + (km * Utilitaria.custoKmExtra);
+		else
+			return dias * valorDiaria;
 	}
 
 	public int getVeiculoID() {
@@ -111,8 +111,8 @@ public class Veiculo {
 
 	@Override
 	public String toString() {
-		return "Veiculo [veiculoID=" + veiculoID + ", nroPortas=" + nroPortas + ", placa=" + placa + ", cor=" + cor
-				+ ", tipoCombustivel=" + tipoCombustivel + ", quilometragem=" + quilometragem + ", valorDiaria="
+		return "Veiculo [\n\t\tveiculoID=" + veiculoID + ", \n\t\tnroPortas=" + nroPortas + ", \n\t\tplaca=" + placa + ", \n\t\tcor=" + cor
+				+ ", \n\t\ttipoCombustivel=" + tipoCombustivel + ", \n\t\tquilometragem=" + quilometragem + ", \n\t\tvalorDiaria="
 				+ valorDiaria + "]";
 	}
 }
